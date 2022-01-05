@@ -24,15 +24,34 @@ docker system prune -a -f
 
 ## Install missing package 
 ```shell
-docker-compose exec app sh -c 'composer install'
+docker-compose exec php sh -c 'composer install'
 ```
-## Create database
+
+## Install Symfony CLI
 ```shell
-docker-compose exec app sh -c 'php bin/console doctrine:database:create'
+ wget https://get.symfony.com/cli/installer -O - | bash 
 ```
-## Make migration
+
+## Install Postgres client 
+```
+sudo apt-get install postgresql-client  
+```
+
+## Connect to database 
+```
+symfony run psql
+```
+## Drop testing database provided by api-platform
+```SQL
+DROP DATABASE api;
+```
+## Create new database
 ```shell
-docker-compose exec app sh -c 'php bin/console make:migration' && docker-compose exec app sh -c 'php bin/console doctrine:migrations:migrate'
+docker-compose exec php sh -c 'php bin/console doctrine:database:create'
+```
+## Make enity migration to database
+```shell
+docker-compose exec php sh -c 'php bin/console make:migration' && docker-compose exec app sh -c 'php bin/console doctrine:migrations:migrate'
 ```
 
 
