@@ -1,3 +1,43 @@
+# Step 1: Docker
+
+## Fist time build
+```shell
+docker-compose build --pull --no-cache
+```
+
+## Build
+```shell
+docker-compose up -d
+```
+
+## Destroy
+```shell
+docker-compose down
+```
+
+## Clean 
+```shell
+docker system prune -a -f
+```
+
+# Step 2: Symfony (with Docker) 
+
+## Install missing package 
+```shell
+docker-compose exec app sh -c 'composer install'
+```
+## Create database
+```shell
+docker-compose exec app sh -c 'php bin/console doctrine:database:create'
+```
+## Make migration
+```shell
+docker-compose exec app sh -c 'php bin/console make:migration' && docker-compose exec app sh -c 'php bin/console doctrine:migrations:migrate'
+```
+
+
+
+
 <h1 align="center"><a href="https://api-platform.com"><img src="https://api-platform.com/logo-250x250.png" alt="API Platform"></a></h1>
 
 API Platform is a next-generation web framework designed to easily create API-first projects without compromising extensibility
