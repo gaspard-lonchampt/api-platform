@@ -49,9 +49,9 @@ DROP DATABASE api;
 ```shell
 docker-compose exec php sh -c 'php bin/console doctrine:database:create'
 ```
-## Make enity migration to database
+## Make entity migration to database
 ```shell
-docker-compose exec php sh -c 'php bin/console make:migration' && docker-compose exec app sh -c 'php bin/console doctrine:migrations:migrate'
+docker-compose exec php sh -c 'php bin/console make:migration' && docker-compose exec php sh -c 'php bin/console doctrine:migrations:migrate'
 ```
 
 
